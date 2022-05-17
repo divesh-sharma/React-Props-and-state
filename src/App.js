@@ -9,7 +9,12 @@ import PostsFunctional from './components/posts.function';
 import GetPostById from './components/getPostById.component';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import AddCourse from './components/add-course.component';
+import FunctionalNewCourse from './components/newcourse.function';
+import NewCourseWithReactHookForm from './components/newcoursereacthookform';
 import PostDetails from './components/postdetails.component';
+import CounterProvider, { GrandParent } from './components/contextAPIbasics';
+import Courses from './components/courses.component';
+import ListOfCourses1 from './components/list-of-course-route-component';
 
 class App extends React.Component {
   render() {
@@ -52,17 +57,34 @@ class App extends React.Component {
                       Posts
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/contextapi">
+                      Context Api
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
           </nav>
 
           <Routes>
-            <Route path="/" element={<ListOfCourse />}></Route>
-            <Route path="/newcourse" element={<AddCourse />}></Route>
+            <Route path="/" element={<Courses />}>
+              <Route index element={<ListOfCourses1 />}></Route>
+              <Route
+                path="newcourse"
+                element={<NewCourseWithReactHookForm />}
+              ></Route>
+            </Route>
             <Route path="/posts" element={<Posts />}></Route>
             <Route path="/postdetails/:id" element={<PostDetails />}></Route>
-            <Route path="*" element={<h2>Resource Not Found</h2>}></Route>
+            <Route path="/contextapi" element={<GrandParent />}></Route>
+
+            <Route
+              path="*"
+              element={
+                <img src="https://i.ytimg.com/vi/Hbdk2_1ZU3o/maxresdefault.jpg" />
+              }
+            ></Route>
           </Routes>
         </BrowserRouter>
 
